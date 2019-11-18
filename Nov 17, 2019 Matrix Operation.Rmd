@@ -1,0 +1,128 @@
+---
+title: "Nov 17, 2019 Matrix Operation Basic"
+author: "Jikhan Jeong"
+date: "11/17/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Matrix Operation in R
+* Ref: http://www.philender.com/courses/multivariate/notes/matr.html
+* ctrl + Enter         : run this line
+* ctrl + shift + Enter : run this chuck
+* Ctrl + Shift + K     : Knit
+* Ctrl + Alt   + I     : Insert a chuck
+
+# Making matrix by using matrix
+```{r}
+A <- matrix(c(seq(1:6)), 2,3)
+A
+```
+
+```{r}
+is.matrix(A)
+```
+```{r}
+is.vector(A)
+```
+
+```{r}
+B <- matrix(c(seq(1:6)), 2,3)
+C <- A+B
+C
+```
+# Transpose t(matrix)
+```{r}
+t(C)
+```
+# Matrix Multiplication
+```{r}
+A # 2 x 3
+t(C) # traspose 3 X 2  
+A%*%t(C) # 2 x x
+```
+# Unit Vector
+```{r}
+(U <- matrix(1,2,2))
+```
+# Zero Vector
+```{r}
+(Z <- matrix(0,2,2))
+```
+# Diagonal component
+```{r}
+C
+diag(C)
+diag(diag(C))
+```
+# Identity Matrix
+```{r}
+c(1,1,1)
+(I <-diag(c(1,1,1)))
+```
+# Inverse of a Matrix
+```{r}
+(A <- matrix(c(4,4,-2,2,6,2,2,8,4),3,3))
+(inv.A <- solve(A))
+A%*%inv.A 
+inv.A %*%A 
+```
+# Inverse & Determinant of a Matrix (=det(A))
+```{r}
+A
+solve(A)
+det(A)
+```
+# Rank of a Matrix
+* Full rank condition
+```{r}
+A <- matrix(c(2,3,-2,1,2,2,4,7,0),3,3)
+matA <- qr(A)
+matA$rank
+```
+* Under justification
+* column 3 is 2 times column 1
+```{r}
+A <- matrix(c(2,3,-2,1,2,2,4,6,-4),3,3)
+A
+matA <- qr(A)
+matA$rank
+```
+# Number of Rows & Columns
+```{r}
+X <- matrix(c(3,2,4,3,2,-2,6,1),4,2)
+X
+dim(X)
+(r <-nrow(X))
+(c<-ncol(X))
+
+```
+# Computing Column & Row Sums
+```{r}
+(A <- matrix(c(2,3,-2,1,2,2),3,2))
+(c<- colSums(A))
+(r<- rowSums(A))
+(a<- sum(A))
+```
+# Computing Column & Row Means
+```{r}
+A
+(cm <- colMeans(A))
+(rm <- rowMeans(A))
+(m  <- mean(A))
+
+```
+# Horizontal Concatenation: A+B **cbind**
+```{r}
+A
+(B <- matrix(c(1,3,2,1,4,2),3,2))
+(C <-cbind(A,B))
+```
+# Vertical Concatenation (Appending): A + B(next row) **rbind**  
+```{r}
+(c<-rbind(A,B))
+```
+
